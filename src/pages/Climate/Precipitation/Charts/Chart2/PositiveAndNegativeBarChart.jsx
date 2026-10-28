@@ -45,8 +45,14 @@ const PositiveAndNegativeBarChart = ({ chartInfo }) => {
             (region, i) => ({ name: region, id: i })
           ) || [];
 
+        const seriesName =
+          language === "ge" ? "დროითი მწკრივი" : "Time series";
+
         const selected = chartInfo.selectedIndices
-          .map((index) => valueTexts[index])
+          .map((index) => {
+            const text = valueTexts[index];
+            return text ? { ...text, name: seriesName } : null;
+          })
           .filter(Boolean);
 
         setSelectedTexts(selected);
