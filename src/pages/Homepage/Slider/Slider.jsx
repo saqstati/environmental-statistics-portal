@@ -22,6 +22,19 @@ const Slider = () => {
     });
   }, []);
 
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setSlideDirection("right");
+      setCurrentIndex((prevIndex) => {
+        const newIndex = (prevIndex + 1) % Slides.length;
+        setCurrentSlide(Slides[newIndex]);
+        return newIndex;
+      });
+    }, 4000);
+
+    return () => clearInterval(timer);
+  }, [currentIndex]);
+
   const nextSlide = () => {
     setSlideDirection("right"); // Set direction for next slide
     setCurrentIndex((prevIndex) => {
